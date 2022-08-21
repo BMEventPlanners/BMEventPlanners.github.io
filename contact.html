@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="style.css">
     <title>B&M | CONTACT US</title>
 </head>
-<body>
+<body color>
 
     <nav>
 
@@ -28,17 +28,37 @@
         </div>
     </nav>
 
-    <div class="contact-box">
-        <form>
-            <input type="text" class="input-field" placeholder="Your Name">
-            <input type="email" class="input-field" placeholder="Your Email">
-            <input type="text" class="input-field" placeholder="Subject">
-                <textarea type="text" class="input-field textarea-field" placeholder="Your Message"></textarea>
-            <button type="button" class="btn">Send Message</button>
+    <div class="container">
+        <form onsubmit="sendEmail(); reset(); return false;">
+            <h3>Contact Us for your Event needs!</h3>
+            <input type="text" id="name" placeholder="Your Name" required>
+            <input type="email" id="email" placeholder="Your Email" required>
+            <input type="text" id="phone" placeholder="Your Phone Number" required>
+            <textarea id="message" rows="4" placeholder="Your Message" required></textarea>
+            <button type="submit">Send Message</button>
         </form>
     </div>
 
     <script src="nav.js"></script>
+    <script src="https://smtpjs.com/v3/smtp.js"></script>
+        <script>
+            function sendEmail() {
+                Email.send({
+                    Host: "smtp.elasticemail.com",
+                    Username: "marleybeare56@gmail.com",
+                    Password: "7F1FFFE6441F4482DE128CEF2E1935C4B27D",
+                    To: 'bmeventplanners1508@gmail.com',
+                    From: document.getElementById("email").value,
+                    Subject: "New Contact Form Enquiry",
+                    Body: "Name:" + document.getElementById("name").value
+                        + "<br> Email: " + document.getElementById("email").value
+                        + "<br> Phone #: " + document.getElementById("phone").value
+                        + "<br> Message: " + document.getElementById("message").value
+                }).then(
+                    message => alert("Message Sent Successfully!")
+                );
+            }
+    </script>
 
 </body>
 </html>
